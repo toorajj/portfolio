@@ -1,5 +1,9 @@
-import { render } from '@testing-library/react';
 import React from 'react';
+
+import comingSoon from '../assets/images/comingSoon.jpg'
+import { Container, Row } from 'react-bootstrap';
+import Card from '../components/Card';
+
 
 class Carousel extends React.Component {
 
@@ -11,7 +15,7 @@ class Carousel extends React.Component {
                     id:0,
                     title: 'Scroll List',
                     subTitle: 'MERN built',
-                    imgSource: '',
+                    imgSource: comingSoon,
                     link: 'https://scroll-list.netlify.app/',
                     selected: false
                 },
@@ -19,7 +23,7 @@ class Carousel extends React.Component {
                     id:1,
                     title: 'Wayfarer',
                     subTitle: 'Python, Django, PostgreSQL',
-                    imgSource: '',
+                    imgSource: comingSoon,
                     link: 'https://project-wayfarer-sei119.herokuapp.com',
                     selected: false
                 },
@@ -27,7 +31,7 @@ class Carousel extends React.Component {
                     id:2,
                     title: 'MediaHub',
                     subTitle: 'Node.js Powered API with Express, Mongoose & MongoDB ',
-                    imgSource: '',
+                    imgSource: comingSoon,
                     link: '',
                     selected: false
                 },
@@ -35,7 +39,7 @@ class Carousel extends React.Component {
                     id:3,
                     title: 'Tomagotchi Project',
                     subTitle: 'JavaScript, CSS, HTML MVP Built ',
-                    imgSource: '',
+                    imgSource: comingSoon,
                     link: '',
                     selected: false
                 }
@@ -55,12 +59,26 @@ class Carousel extends React.Component {
                 item.selected = false;
             }
         });
-    
+
+        this.setState({
+            items
+        });
+    }
+
+    makeItems = (items) => {
+        return items.map(item => {
+            return <Card item={item} onClick={(e => this.handleCardClick(item.id, e))} key={item.id}/>
+        });
     }
 
     render() {
         return(
-            <p> carousel works</p>
+            <Container fluid={true}>
+                <Row className="justify-content-around">
+                    {this.makeItems(this.state.items)}
+                </Row>
+
+            </Container>
         );
     }
 
